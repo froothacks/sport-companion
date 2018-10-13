@@ -108,10 +108,10 @@ def all_activites():
 def settings():
     return render_template("settings.html")
 
-@app.route("/actvities")
+@app.route("/activities")
 @login_required
 def actvities():
-    return render_template("actvities.html")
+    return render_template("activities.html")
 
 @app.route("/update_prefs", methods=["POST"])
 @login_required

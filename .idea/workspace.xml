@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dbef546c-22ba-4f13-9f9c-c9df918bf7a8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/sport_companion$backend.coverage" NAME="backend Coverage Results" MODIFIED="1539459277136" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/sport_companion$backend.coverage" NAME="backend Coverage Results" MODIFIED="1539469103963" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-1705474806">
@@ -60,19 +60,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="335">
-              <caret line="113" column="43" selection-start-line="113" selection-start-column="43" selection-end-line="113" selection-end-column="43" />
+              <caret line="113" column="38" selection-start-line="113" selection-start-column="38" selection-end-line="113" selection-end-column="38" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
-                <marker date="1539468369903" expanded="true" signature="442:472" ph="..." />
-                <marker date="1539468369903" expanded="true" signature="615:621" ph="..." />
-                <marker date="1539468369903" expanded="true" signature="1360:3091" ph="..." />
-                <marker date="1539468369903" expanded="true" signature="2217:3091" ph="..." />
-                <marker date="1539468369903" expanded="true" signature="2730:2777" ph="..." />
-                <marker date="1539468369903" expanded="true" signature="2858:2962" ph="..." />
+                <marker date="1539469133150" expanded="true" signature="442:472" ph="..." />
+                <marker date="1539469133150" expanded="true" signature="615:621" ph="..." />
+                <marker date="1539469133150" expanded="true" signature="1360:3093" ph="..." />
+                <marker date="1539469133150" expanded="true" signature="2217:3093" ph="..." />
+                <marker date="1539469133150" expanded="true" signature="2731:2779" ph="..." />
+                <marker date="1539469133150" expanded="true" signature="2860:2964" ph="..." />
               </folding>
             </state>
           </provider>
@@ -81,17 +81,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+            <state relative-caret-position="119">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="36" column="51" selection-start-line="36" selection-start-column="51" selection-end-line="36" selection-end-column="51" />
+            <state relative-caret-position="86">
+              <caret line="26" column="27" lean-forward="true" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -209,8 +209,8 @@
         <option value="$PROJECT_DIR$/templates/index3.html" />
         <option value="$PROJECT_DIR$/static/src/activities.js" />
         <option value="$PROJECT_DIR$/templates/activities.html" />
-        <option value="$PROJECT_DIR$/backend.py" />
         <option value="$PROJECT_DIR$/templates/main.html" />
+        <option value="$PROJECT_DIR$/backend.py" />
       </list>
     </option>
   </component>
@@ -303,8 +303,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/sport-companion.iml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/static/css/main_webapp.css</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/static/src/main.js</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/templates/main.html</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
@@ -313,28 +312,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/libraries/R_User_Library.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/credits.txt</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/american-football.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/badminton.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/basketball.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/bicycle.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/bowling.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/goal.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/gym.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/running-man.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/soccer.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/images/swimming.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/static/images/american-football.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/static/images/badminton.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/static/images/basketball.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/static/images/bicycle.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/static/images/bowling.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/static/images/goal.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/static/images/gym.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/static/images/running-man.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/static/images/soccer.png</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/static/images/swimming.png</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -496,7 +473,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24966443" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24966443" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
@@ -506,7 +483,7 @@
       <window_info anchor="bottom" id="Event Log" sideWeight="0.50067115" side_tool="true" weight="0.32907802" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32907802" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" weight="0.32907802" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.32907802" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -599,8 +576,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
         </state>
       </provider>
     </entry>
@@ -673,26 +650,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend.py">
+    <entry file="file://$PROJECT_DIR$/templates/main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="113" column="43" selection-start-line="113" selection-start-column="43" selection-end-line="113" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-            <marker date="1539468369903" expanded="true" signature="442:472" ph="..." />
-            <marker date="1539468369903" expanded="true" signature="615:621" ph="..." />
-            <marker date="1539468369903" expanded="true" signature="1360:3091" ph="..." />
-            <marker date="1539468369903" expanded="true" signature="2217:3091" ph="..." />
-            <marker date="1539468369903" expanded="true" signature="2730:2777" ph="..." />
-            <marker date="1539468369903" expanded="true" signature="2858:2962" ph="..." />
-          </folding>
+        <state relative-caret-position="86">
+          <caret line="26" column="27" lean-forward="true" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/main.html">
+    <entry file="file://$PROJECT_DIR$/backend.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="36" column="51" selection-start-line="36" selection-start-column="51" selection-end-line="36" selection-end-column="51" />
+        <state relative-caret-position="335">
+          <caret line="113" column="38" selection-start-line="113" selection-start-column="38" selection-end-line="113" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#68#0" expanded="true" />
+            <marker date="1539469133150" expanded="true" signature="442:472" ph="..." />
+            <marker date="1539469133150" expanded="true" signature="615:621" ph="..." />
+            <marker date="1539469133150" expanded="true" signature="1360:3093" ph="..." />
+            <marker date="1539469133150" expanded="true" signature="2217:3093" ph="..." />
+            <marker date="1539469133150" expanded="true" signature="2731:2779" ph="..." />
+            <marker date="1539469133150" expanded="true" signature="2860:2964" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
