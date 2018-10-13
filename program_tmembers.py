@@ -1,12 +1,6 @@
 import datetime
 from dateutil import parser
 
-from infrastructure.switchlang import switch
-import program_hosts as hosts
-import services.data_service as svc
-from program_hosts import success_msg, error_msg
-import infrastructure.state as state
-
 
 def run():
     print(' ****************** Welcome team member **************** ')
