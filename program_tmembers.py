@@ -1,6 +1,11 @@
 import datetime
 from dateutil import parser
 
+from infrastructure.switchlang import switch
+import program_tmakers as tmaker
+import services.data_service as svc
+from program_tmakers import success_msg, error_msg
+import infrastructure.state as state
 
 def run():
     print(' ****************** Welcome team member **************** ')
@@ -17,15 +22,15 @@ def run():
 
             s.case('a', add_a_sportevent) 
             s.case('y', view_your_sportevents) 
-            s.case('b', join_a_sportevent) 
+            s.case('b', join_a_sport_event) 
             s.case('v', view_your_joinings) 
             s.case('m', lambda: 'change_mode') 
 
             s.case('?', show_commands) #help
             s.case('', lambda: None) 
-            s.case(['x', 'bye', 'exit', 'exit()'], hosts.exit_app)
+            s.case(['x', 'bye', 'exit', 'exit()'], tmaker.exit_app)
 
-            s.default(hosts.unknown_command)
+            s.default(tmaker.unknown_command)
 
         state.reload_account()
 
@@ -65,7 +70,7 @@ def add_a_sportevent():
     location = ("Location (Address) ?")
     is_outdoors = input("Are you playing outdoors [y]es, [n]o? ").lower().startswith('y')
 
-    sport = svc.add_sport(state.active_account, name, length, location, environment )
+    sport = svc.add_sport(state.active_account, name, length, location, is_outdoors)
     state.reload_account()
     success_msg('Created {} with id {}'.format(sport.name, sport.id))
 

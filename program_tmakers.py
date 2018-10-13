@@ -2,6 +2,7 @@ import datetime
 from colorama import Fore
 from dateutil import parser
 
+
 from infrastructure.switchlang import switch
 import infrastructure.state as state
 import services.data_service as svc
@@ -116,10 +117,10 @@ def list_events(suppress_header=False):
         error_msg('You must login first to register an event.')
         return
 
-    cages = svc.find_event_for_user(state.active_account)
+    events = svc.find_events_for_user(state.active_account)
     print(f"You have {len(events)} events.")
     for idx, c in enumerate(events):
-        print(f' {idx+1}. {c.name} for {c.square_meters} minutes.')
+        print(f' {idx+1}. {c.name} for {c.duration_minutes} minutes.')
         for b in c.bookings:
             print('      * Booking: {}, {} days, booked? {}'.format(
                 b.check_in_date,
@@ -135,10 +136,10 @@ def update_availability():
         error_msg("You must log in first to register a cage")
         return
 
-    list_cages(suppress_header=True)
+    list_events(suppress_header=True)
 
-    cage_number = input("Enter event number: ")
-    if not cage_number.strip():
+    event_number = input("Enter event number: ")
+    if not event_number.strip():
         error_msg('Cancelled')
         print()
         return
@@ -156,12 +157,12 @@ def update_availability():
     days = int(input("How many days is this block of time? "))
 
     svc.add_available_date(
-        selected_cage,
+        selected_event,
         start_date,
         days
     )
 
-    success_msg(f'Date added to cage {selected_cage.name}.')
+    success_msg(f'Date added to event {selected_event.name}.')
 
 
 def view_bookings():
@@ -171,7 +172,7 @@ def view_bookings():
         error_msg("You must log in first to register an event")
         return
 
-    event = svc.find_events_for_user(state.active_account)
+    events = svc.find_events_for_user(state.active_account)
 
     bookings = [
         (c, b)

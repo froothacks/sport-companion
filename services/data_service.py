@@ -26,8 +26,8 @@ def find_account_by_email(email: str) -> Owner:
 
 
 def register_event(active_account: Owner,
-                  name, allow_non_friends, has_toys,
-                  carpeted, minutes, rating_price) -> Event:
+                  name, allow_non_friends, in_public_place,
+                  in_outdoors, duration_minutes, rating_price) -> Event:
     event = Event()
 
     event.name = name
