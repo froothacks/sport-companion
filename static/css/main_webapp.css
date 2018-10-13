@@ -3,28 +3,36 @@
  * Copyright 2013-2017 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
  */
+.logout:hover {
+    color: #dc3545!important;
+}
 
 body {
-  padding-top: 54px;
-}
-.no-border {
-  border: none;
-}
-.fixed-icon-height{
-  width: 1rem;
-  height: 1rem;
+    padding-top: 54px;
 }
 
-.card:hover{
-  border: 2px solid #00000056;
-  border-radius: 7px;
+.no-border {
+    border: none;
 }
+
+.fixed-icon-height {
+    width: 1rem;
+    height: 1rem;
+}
+
+.card:hover {
+    border: 2px solid #00000056;
+    border-radius: 7px;
+}
+
 .sport-name {
-  text-align: center;
-  font-size: 20px;
+    text-align: center;
+    font-size: 20px;
 }
+
 @media (min-width: 992px) {
-  body {
-    padding-top: 56px;
-  }
+    body {
+        padding-top: 56px;
+    }
 }
+

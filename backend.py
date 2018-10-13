@@ -66,7 +66,7 @@ def user_dash():
     return render_template("main.html")
 
 
-@app.route("/auth", methods=["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 def authenticate():
     if request.method == "GET":
         return render_template("index.html")
@@ -85,7 +85,7 @@ def authenticate():
             return auth_message
 
 
-@app.route('/protected')
+@app.route('/home')
 @login_required
 def protected():
     return render_template("main.html")
@@ -106,7 +106,7 @@ def all_activites():
 @login_required
 def logout():
     flask_login.logout_user()
-    return render_template("index.html")
+    return redirect(url_for('authenticate'))
 
 
 if __name__ == '__main__':
