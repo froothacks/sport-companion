@@ -108,6 +108,10 @@ def all_activites():
 def settings():
     return render_template("settings.html")
 
+@app.route("/actvities")
+@login_required
+def actvities():
+    return render_template("actvities.html")
 
 @app.route("/update_prefs", methods=["POST"])
 @login_required
