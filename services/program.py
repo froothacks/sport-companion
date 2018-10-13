@@ -1,6 +1,5 @@
-#from colorama import Fore
-import program_guests
-import program_hosts
+import program_tmembers
+import program_tmakers
 import data.mongo_setup as mongo_setup
 
 
@@ -12,9 +11,9 @@ def main():
     try:
         while True:
             if find_user_intent() == 'book': #if the user wants to find an event 
-                program_guests.run()
+                program_tmembers.run()
             else:
-                program_hosts.run()  #if the user wants to create an event.
+                program_tmakers.run()  #if the user wants to create an event.
     except KeyboardInterrupt:
         return
 
