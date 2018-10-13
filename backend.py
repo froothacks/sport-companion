@@ -66,7 +66,7 @@ def user_dash():
     return render_template("main.html")
 
 
-@app.route("/auth", methods=["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 def authenticate():
     if request.method == "GET":
         return render_template("index.html")
@@ -85,7 +85,7 @@ def authenticate():
             return auth_message
 
 
-@app.route('/protected')
+@app.route('/home')
 @login_required
 def protected():
     return render_template("main.html")
@@ -97,16 +97,23 @@ def check_user_creds(login, passw):
         message = ""  # Empty string for no error message
     return message
 
+
 @app.route("/events")
 def all_activites():
-    return json.dumps({'result':[{"id":"1321321321", "name":"Baseball", "event-time":"2018-10-13T12:11:50"}]})
+    return json.dumps({'result': [{"id": "1321321321", "name": "Baseball", "event-time": "2018-10-13T12:11:50"}]})
+
+
+@app.route('/preferences')
+@login_required
+def settings():
+    return render_template("index3.html")
 
 
 @app.route('/logout')
 @login_required
 def logout():
     flask_login.logout_user()
-    return render_template("index.html")
+    return redirect(url_for('authenticate'))
 
 
 if __name__ == '__main__':

@@ -3,6 +3,9 @@
  * Copyright 2013-2017 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
  */
+.logout:hover {
+    color: #dc3545!important;
+}
 
 body {
   padding-top: 54px;

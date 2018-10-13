@@ -42,11 +42,10 @@
                     <a class="nav-link" href="#">Activities</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Settings</a>
-                    <img src="" alt="">
+                    <a class="nav-link" href="/preferences">Settings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">Log out</a>
+                    <a class="nav-link logout" href="/logout">Log out</a>
 
                 </li>
             </ul>
@@ -120,7 +119,9 @@
 <script src="{{ url_for('static', filename='src/jquery-3.3.1.js') }}"></script>
 <script src="{{ url_for('static', filename='src/bootstrap.bundle.js') }}"></script>
 <script src="{{ url_for('static', filename='src/main.js') }}"></script>
-
+<script src="{{ url_for('static', filename='src/login-script.js') }}"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.12/css/mdb.min.css" rel="stylesheet">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.12/js/mdb.min.js"></script>
 </body>
 
 </html>

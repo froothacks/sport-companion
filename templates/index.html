@@ -3,40 +3,44 @@
 <html lang="en">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="">
 
-  <title>Sport Companion Login</title>
-  <script src="{{ url_for('static', filename='src/jquery-3.3.1.js') }}"></script>
-  <script src="{{ url_for('static', filename='src/login-script.js') }}"></script>
-  
-  <!-- Bootstrap core CSS -->
-  <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <title>Sport Companion Login</title>
+    <script src="{{ url_for('static', filename='src/jquery-3.3.1.js') }}"></script>
+    <script src="{{ url_for('static', filename='src/login-script.js') }}"></script>
 
-  <!-- Custom styles for this template -->
-  <link href="{{ url_for('static', filename='css/signin.css') }}" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.12/css/mdb.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='css/signin.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.12/js/mdb.min.js"></script>
 </head>
 
 <body class="text-center">
-  <form class="form-signin" action="/auth" method="post">
+<form class="form-signin" action="/login" method="post">
     <img class="mb-4" src="{{ url_for('static', filename='src/bootstrap-solid.svg') }}" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="email" class="sr-only">Email address</label>
-    <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required="" autofocus=""
-      autocomplete="off">
+    <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required=""
+           autofocus=""
+           autocomplete="off">
     <label for="password" class="sr-only">Password</label>
-    <input type="password" name="password" id="password" class="form-control" placeholder="Password" required="" autocomplete="off">
+    <input type="password" name="password" id="password" class="form-control" placeholder="Password" required=""
+           autocomplete="off">
     <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
+        <label>
+            <input type="checkbox" value="remember-me"> Remember me
+        </label>
     </div>
     <button id="submit" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-  </form>
+    <a style="font-size: 14px; color: inherit;" href="register">Not a member? Sign Up!</a>
+</form>
 
 
 </body>
