@@ -1,4 +1,4 @@
-x<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -15,7 +15,7 @@ x<!DOCTYPE html>
 
 
     <!-- Custom styles for this template -->
-      <link href="{{ url_for('static', filename='css/main_webapp.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/main_webapp.css') }}" rel="stylesheet">
 
 
 </head>
@@ -43,6 +43,11 @@ x<!DOCTYPE html>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Settings</a>
+                    <img src="" alt="">
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log out</a>
+
                 </li>
             </ul>
         </div>
@@ -68,7 +73,6 @@ x<!DOCTYPE html>
             <div class="card">
                 <a href="#"><img class="card-img-top" src="http://placehold.it/200x100" alt=""></a>
                 <div class="sport-name">Basket Ball</div>
-
             </div>
         </div>
         <div class="col-lg-4 col-md-6 mb-4">
@@ -107,6 +111,7 @@ x<!DOCTYPE html>
 
 <!-- Bootstrap core JavaScript -->
 <script src="{{ url_for('static', filename='src/jquery-3.3.1.js') }}"></script>
+<script src="{{ url_for('static', filename='src/bootstrap.bundle.js') }}"></script>
 <script src="{{ url_for('static', filename='src/login-script.js') }}"></script>
 
 </body>

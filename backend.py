@@ -5,37 +5,45 @@ from flask_login import login_required
 
 app = Flask(__name__)
 login_manager = flask_login.LoginManager()
+login_manager.login_view = "authenticate"
+login_manager.login_message = u"Please log in to access this page."
 app.secret_key = '123abcdefgfroothacks2018'  # Change this!
 
 
 class User(flask_login.UserMixin):
-    def __init__(self):
-        id = None
+    def __init__(self, email):
+        self.id = email
 
     def is_authenticated(self):
-        return self.is_authenticated
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
 
     def get_id(self):
-        return 123
+        return self.id
 
 
 @login_manager.user_loader
 def user_loader(email):
-    if email not in users:
+    if email not in users.keys():
         return
 
-    user = User()
-    user.id = email
+    user = User(email)
+
     return user
 
 
 @login_manager.request_loader
 def request_loader(request):
     email = request.form.get('email')
-    if email not in users:
+    if email not in users.keys():
         return
 
-    user = User()
+    user = User(email)
     user.id = email
 
     # DO NOT ever store passwords in plaintext and always compare password
@@ -58,27 +66,29 @@ def user_dash():
     return render_template("main.html")
 
 
-@app.route("/auth", methods=["POST"])
+@app.route("/auth", methods=["GET", "POST"])
 def authenticate():
-    passw = request.form["password"]
-    login_id = request.form["email"]
-    print(login_id, passw)
-    auth_message = check_user_creds(login_id, passw)
-    print(auth_message)
-    if auth_message == "":
-        user = User()
-        user.id = login_id
-        flask_login.login_user(user)
-        return redirect(url_for('/protected'))
+    if request.method == "GET":
+        return render_template("index.html")
 
-    else:
-        return auth_message
+    if request.method == "POST":
+        passw = request.form["password"]
+        login_id = request.form["email"]
+        print(login_id, passw)
+        auth_message = check_user_creds(login_id, passw)
+        if auth_message == "":
+            user = User(login_id)
+            user.id = login_id
+            flask_login.login_user(user)
+            return redirect(url_for('protected'))
+        else:
+            return auth_message
 
 
 @app.route('/protected')
 @login_required
 def protected():
-    return 'Logged in as: ' + flask_login.current_user.id
+    return render_template("main.html")
 
 
 def check_user_creds(login, passw):
@@ -87,14 +97,19 @@ def check_user_creds(login, passw):
         message = ""  # Empty string for no error message
     return message
 
+@app.route("/events")
+def all_activites():
+    return json.dumps({'result':[{"id":"1321321321", "name":"Baseball", "event-time":"2018-10-13T12:11:50"}]})
+
 
 @app.route('/logout')
+@login_required
 def logout():
     flask_login.logout_user()
-    return 'Logged out'
+    return render_template("index.html")
 
 
 if __name__ == '__main__':
     users = {'cl@cl.ca': {'password': 'cl@cl.ca'}}
     login_manager.init_app(app)
-    app.run()
+    app.run(debug=True)
