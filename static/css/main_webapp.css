@@ -1,0 +1,25 @@
+/*
+ * Start Bootstrap - Shop Homepage (https://startbootstrap.com/template-overviews/shop-homepage)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
+ */
+
+body {
+  padding-top: 54px;
+}
+.no-border {
+  border: none;
+}
+.card:hover{
+  border: 2px solid #00000056;
+  border-radius: 7px;
+}
+.sport-name {
+  text-align: center;
+  font-size: 20px;
+}
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px;
+  }
+}
