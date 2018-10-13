@@ -7,6 +7,8 @@ import services.data_service as svc
 from program_tmakers import success_msg, error_msg
 import infrastructure.state as state
 
+from pdb import set_trace as keyboard
+
 def run():
     print(' ****************** Welcome team member **************** ')
     print()
@@ -22,7 +24,7 @@ def run():
 
             s.case('a', add_a_sportevent) 
             s.case('y', view_your_sportevents) 
-            s.case('b', join_a_sport_event) 
+            s.case('j', join_a_sport_event) 
             s.case('v', view_your_joinings) 
             s.case('m', lambda: 'change_mode') 
 
@@ -69,8 +71,9 @@ def add_a_sportevent():
     length = float(input('How long would you like to play (in minutes)? '))
     location = ("Location (Address) ?")
     is_outdoors = input("Are you playing outdoors [y]es, [n]o? ").lower().startswith('y')
+    is_public = input("Are you playting in a public property/place [y]es, [n]o?").lower().startswith('y')
 
-    sport = svc.add_sport(state.active_account, name, length, location, is_outdoors)
+    sport = svc.add_sport(state.active_account, name, length, location, is_outdoors, is_public)
     state.reload_account()
     success_msg('Created {} with id {}'.format(sport.name, sport.id))
 
@@ -100,7 +103,7 @@ def join_a_sport_event():
 
     sports = svc.get_sports_for_user(state.active_account.id)
     if not sports:
-        error_msg('You must first [a]dd a sport before you can book a event.')
+        error_msg('You must first [a]dd a sport query before you can book a event.')
         return
 
     print("Let's start by finding available sportevents.")
@@ -113,7 +116,7 @@ def join_a_sport_event():
         start_text
     )
     checkout = parser.parse(
-        input("Check-out time [date, minutes]: ")
+        input("Check-out time [yyyy-mm-dd-hh-mm]: ")
     )
     if checkin >= checkout:
         error_msg('Check in must be before check out')
@@ -121,16 +124,17 @@ def join_a_sport_event():
 
     print()
     for idx, s in enumerate(sports):
-        print('{}. {} (length: {}, outdoors: {})'.format(
+        print('{}. {} (duration_minutes: {}, outdoors: {}, public: {})'.format(
             idx + 1,
             s.name,
-            s.length,
-            'yes' if s.is_outdoors else 'no'
+            s.duration_minutes,
+            'yes' if s.is_outdoors else 'no',
+            'yes' if s.is_public else 'no'
         ))
 
     sport = sports[int(input('Which sportevent do you want to join (number)')) - 1]
 
-    sportevents = svc.get_available_sportevents(checkon, checkon, sport)
+    sportevents = svc.get_available_events(checkin, checkout, sport)
 
     print("There are {} sportevents available in that day.".format(len(sportevents)))
     for idx, c in enumerate(sportevents):
@@ -146,9 +150,9 @@ def join_a_sport_event():
         return
 
     sportevent = sportevents[int(input('Which sportevent do you want to join (number)')) - 1]
-    svc.book_sportevent(state.active_account, sport, sportevent, checkin, checkout)
+    svc.book_event(state.active_account, sport, sportevent, checkin, checkout)
 
-    success_msg('Successfully booked {} for {} at ${}/night.'.format(sportevent.name, sport.name, sportevent.ava))
+    success_msg('Successfully joined {} for {} at ${}/night.'.format(sportevent.name, sport.name, sportevent.rating_price))
 
 
 def view_your_joinings():

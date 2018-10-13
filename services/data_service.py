@@ -66,12 +66,13 @@ def add_available_date(event: Event,
     return event
 
 
-def add_sport(account, name, length, location, is_outdoors) -> Sport:
+def add_sport(account, name, duration_minutes, location, is_outdoors, is_public) -> Sport:
     sport = Sport()
     sport.name = name
-    sport.length = length
+    sport.duration_minutes = duration_minutes
     sport.location = location
     sport.is_outdoors = is_outdoors
+    sport.is_public = is_public
     sport.save()
 
     owner = find_account_by_email(account.email)
@@ -90,7 +91,7 @@ def get_sports_for_user(user_id: bson.ObjectId) -> List[Sport]:
 
 def get_available_events(checkin: datetime.datetime,
                         checkout: datetime.datetime, sport: Sport) -> List[Event]:
-    min_size = sport.length / 4
+    min_size = sport.duration_minutes / 4
 
     query = Event.objects() \
         .filter(duration_minutes__gte=min_size) \

@@ -152,7 +152,7 @@ def update_availability():
     success_msg("Selected event {}".format(selected_event.name))
 
     start_date = parser.parse(
-        input("Enter available date [yyyy-mm-dd]: ")
+        input("Enter available date and time 2018-10-13T12:11:50 : ")
     )
     days = int(input("How many days is this block of time? "))
 
