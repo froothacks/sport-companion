@@ -1,5 +1,5 @@
 import datetime
-#from colorama import Fore
+from colorama import Fore
 from dateutil import parser
 
 from infrastructure.switchlang import switch

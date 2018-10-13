@@ -99,7 +99,7 @@ def join_a_sport_event():
         return
 
     print("Let's start by finding available sportevents.")
-    start_text = input("Check on date [yyyy-mm-dd]: ")
+    start_text = input("Check on time [minutes]: ")
     if not start_text:
         error_msg('cancelled')
         return
@@ -107,12 +107,12 @@ def join_a_sport_event():
     checkin = parser.parse(
         start_text
     )
-    #checkout = parser.parse(
-        #input("Check-out date [yyyy-mm-dd]: ")
+    checkout = parser.parse(
+        input("Check-out time [minutes]: ")
     )
-    #if checkin >= checkout:
-        #error_msg('Check in must be before check out')
-        #return
+    if checkin >= checkout:
+        error_msg('Check in must be before check out')
+        return
 
     print()
     for idx, s in enumerate(sports):
@@ -129,12 +129,12 @@ def join_a_sport_event():
 
     print("There are {} sportevents available in that day.".format(len(sportevents)))
     for idx, c in enumerate(sportevents):
-        print(" {}. {} with {}m carpeted: {}, has toys: {}.".format(
+        print(" {}. {} with {}m in_public_place: {}, in_outdoors: {}.".format(
             idx + 1,
             c.name,
-            c.square_meters,
-            'yes' if c.is_carpeted else 'no',
-            'yes' if c.has_toys else 'no'))
+            c.duration_minutes,
+            'yes' if c.in_public_place else 'no',
+            'yes' if c.in_outdoors else 'no'))
 
     if not sportevents:
         error_msg("Sorry, no sportevents are available for that date.")
