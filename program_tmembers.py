@@ -80,9 +80,9 @@ def view_your_sportevents():
     print("You have {} sportevents.".format(len(sports)))
     for s in sports:
         print(" * {} is a {} that is {}minute(s) long and it will on {}outdoors.".format(
-            s.name
-            s.location
-            s.length
+            s.name,
+            s.location,
+            s.length,
             '' if s.is_outdoors else 'not'
         ))
 
@@ -99,7 +99,7 @@ def join_a_sport_event():
         return
 
     print("Let's start by finding available sportevents.")
-    start_text = input("Check on time [minutes]: ")
+    start_text = input("Check on time [date, minutes]: ")
     if not start_text:
         error_msg('cancelled')
         return
@@ -108,7 +108,7 @@ def join_a_sport_event():
         start_text
     )
     checkout = parser.parse(
-        input("Check-out time [minutes]: ")
+        input("Check-out time [date, minutes]: ")
     )
     if checkin >= checkout:
         error_msg('Check in must be before check out')
@@ -141,7 +141,7 @@ def join_a_sport_event():
         return
 
     sportevent = sportevents[int(input('Which sportevent do you want to join (number)')) - 1]
-    svc.book_sportevent(state.active_account, sport, sportevent, from, to)
+    svc.book_sportevent(state.active_account, sport, sportevent, checkin, checkout)
 
     success_msg('Successfully booked {} for {} at ${}/night.'.format(sportevent.name, sport.name, sportevent.ava))
 
