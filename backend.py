@@ -106,7 +106,15 @@ def all_activites():
 @app.route('/preferences')
 @login_required
 def settings():
-    return render_template("index3.html")
+    return render_template("settings.html")
+
+
+@app.route("/update_prefs", methods=["POST"])
+@login_required
+def update_prefs():
+    passw = request.form["password"]
+    login_id = request.form["email"]
+    print(login_id, passw)
 
 
 @app.route('/logout')

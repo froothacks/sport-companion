@@ -57,7 +57,7 @@
     </div>
     <!-- /.row -->
     <div class="row">
-        <form class="expander" method="post">
+        <form class="expander" action="/update_prefs" method="post">
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">
@@ -97,7 +97,7 @@
                                                 <label>Notification preference</label>
                                             </div>
                                             <div class="col-md-8">
-                                                <select class="form-control">
+                                                <select name="notification-pref" class="form-control">
                                                     <option value="Call">Call</option>
                                                     <option value="Text">Text</option>
                                                 </select>
@@ -114,13 +114,10 @@
                                                 <label>Alert preference</label>
                                             </div>
                                             <div class="col-md-8">
-                                                <select class="form-control" data="pull-right" data-style="text-right">
-                                                    <option value="1 hour">1 hour</option>
-                                                    <option value="45 mins">45 mins</option>
-                                                    <option value="30 mins">30 mins</option>
-                                                    <option value="15 mins">15 mins</option>
-                                                    <option value="10 mins">10 mins</option>
-                                                    <option value="5 mins">5 mins</option>
+                                                <select class="form-control" name="delay">
+                                                    <option value=60>1 hour</option>
+                                                    <option value=120>2 hours</option>
+                                                    <option value=180>3 hours</option>
                                                 </select>
                                             </div>
                                         </div>
