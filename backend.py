@@ -97,9 +97,16 @@ def check_user_creds(login, passw):
         message = ""  # Empty string for no error message
     return message
 
+
 @app.route("/events")
 def all_activites():
-    return json.dumps({'result':[{"id":"1321321321", "name":"Baseball", "event-time":"2018-10-13T12:11:50"}]})
+    return json.dumps({'result': [{"id": "1321321321", "name": "Baseball", "event-time": "2018-10-13T12:11:50"}]})
+
+
+@app.route('/preferences')
+@login_required
+def settings():
+    return render_template("index3.html")
 
 
 @app.route('/logout')
