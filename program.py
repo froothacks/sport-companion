@@ -88,6 +88,18 @@ def user_loader(email):
     return user
 
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "GET":
+        return render_template("register.html")
+    if request.method == "POST":
+        passw = request.form["password"]
+        login_id = request.form["email"]
+        name = request.form["name"]
+        print("REG", name, login_id, passw)
+        return redirect(url_for("authenticate"))
+
+
 @login_manager.request_loader
 def request_loader(request):
     email = request.form.get('email')
