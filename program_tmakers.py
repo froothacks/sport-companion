@@ -52,36 +52,24 @@ def show_commands():
     print()
 
 
-def create_account():
+def create_account(name, email, password):
     print(' ****************** REGISTER **************** ')
 
-    name = input('What is your name? ')
-    email = input('What is your email? ').strip().lower()
-    password = input('Choose a password:')
+    # name = input('What is your name? ')
+    # email = input('What is your email? ').strip().lower()
+    # password = input('Choose a password:')
 
     old_account = svc.find_account_by_email(email)
     if old_account:
         error_msg(f"ERROR: Account with email {email} already exists.")
-        return
+        return False
 
     state.active_account = svc.create_account(name, email, password)
-    success_msg(f"Created new account with id {state.active_account.id}.")
+    success_msg(f"Created new account with id {svc.find_account_by_email(email).id}.")
+    return True
 
 
-def log_into_account():
-    print(' ****************** LOGIN **************** ')
-
-    email = input('What is your email? ').strip().lower()
-    account = svc.find_account_by_email(email)
-    print(account)
-    if not account:
-        error_msg(f'Could not find account with email {email}.')
-        return
-
-    state.active_account = account
-    success_msg('Logged in successfully.')
-
-def logIntoAccount(email, password):
+def checkAuth(email, password):
     email = email.strip().lower()
     account = svc.find_account_by_email(email)
     print(account)
@@ -93,45 +81,44 @@ def logIntoAccount(email, password):
         return False
 
     print(account['password'])
-    state.active_account = account
     print("LOG IN SUCCESS")
     return True
 
 
 
-def register_event():
+# def register_event():
+#     print(' ****************** REGISTER EVENT **************** ')
+#
+#     if not .email:
+#         error_msg('You must login first to register a cage.')
+#         return
+#
+#     minutes = input('How long is the duration for the event? ')
+#     if not minutes:
+#         error_msg('Cancelled')
+#         return
+#
+#     minutes = float(minutes)
+#     in_public_place = input("Is it in a public space [y, n]? ").lower().startswith('y')
+#     in_outdoors = input("Is it outdoors [y, n]? ").lower().startswith('y')
+#     allow_non_friends = input("Do you allow strangers (non-friends) to join your event [y, n]? ").lower().startswith('y')
+#     name = input("Give your sportevent a name: ")
+#     rating_price = float(input("How much rating are you expecting for the players to have?  "))
+#
+#     cage = svc.register_event(
+#         .email, name,
+#         allow_non_friends, in_outdoors, in_public_place, minutes, rating_price
+#     )
+#
+#     state.reload_account()
+#     success_msg(f'Register new sportevent with id {cage.id}.')
+
+def registerEvent(startDate, minutes, name, email):
     print(' ****************** REGISTER EVENT **************** ')
 
-    if not state.active_account:
-        error_msg('You must login first to register a cage.')
-        return
-
-    minutes = input('How long is the duration for the event? ')
-    if not minutes:
-        error_msg('Cancelled')
-        return
-
-    minutes = float(minutes)
-    in_public_place = input("Is it in a public space [y, n]? ").lower().startswith('y')
-    in_outdoors = input("Is it outdoors [y, n]? ").lower().startswith('y')
-    allow_non_friends = input("Do you allow strangers (non-friends) to join your event [y, n]? ").lower().startswith('y')
-    name = input("Give your sportevent a name: ")
-    rating_price = float(input("How much rating are you expecting for the players to have?  "))
-
-    cage = svc.register_event(
-        state.active_account, name,
-        allow_non_friends, in_outdoors, in_public_place, minutes, rating_price
-    )
-
-    state.reload_account()
-    success_msg(f'Register new sportevent with id {cage.id}.')
-
-def registerEvent(startDate, minutes, name, username):
-    print(' ****************** REGISTER EVENT **************** ')
-
-    if not state.active_account:
-        print('You must login first to register an event.')
-        return False
+    # if not .email:
+    #     print('You must login first to register an event.')
+    #     return False
 
     # minutes = input('How long is the duration for the event? ')
     # if not minutes:
@@ -146,11 +133,11 @@ def registerEvent(startDate, minutes, name, username):
     # rating_price = float(input("How much rating are you expecting for the players to have?  "))
 
     cage = svc.register_event(
-        state.active_account, startDate, name, minutes
+        email, startDate, name, minutes
     )
 
-    state.reload_account()
-    success_msg(f'Register new sportevent with id {cage.id}.')
+    # state.reload_account()
+    # success_msg(f'Register new sportevent with id {cage.id}.')
 
 def list_events(suppress_header=False):
     if not suppress_header:

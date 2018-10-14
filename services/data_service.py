@@ -26,7 +26,7 @@ def find_account_by_email(email: str) -> Owner:
     return owner
 
 
-def register_event(active_account: Owner,
+def register_event(email,
                    startDate, name, minutes) -> Event:
     event = Event()
 
@@ -36,7 +36,7 @@ def register_event(active_account: Owner,
 
     event.save()
 
-    account = find_account_by_email(active_account.email)
+    account = find_account_by_email(email)
     account.event_ids.append(event.id)
     account.save()
 

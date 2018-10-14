@@ -10,7 +10,8 @@ def main():
     mongo_setup.global_init()
 
     print_header()
-    # program_tmakers.logIntoAccount("ad@gog.com", "addy")
+    print(program_tmakers.create_account('leon', 'leon@gog.com', 'laddy'))
+    # print(program_tmakers.logIntoAccount("ad@gog.com", "addy"))
     # program_tmakers.registerEvent(datetime.datetime.now(), 60, "Baseball2", "ad@gog.com")
     # try:
     #     while True:
@@ -130,7 +131,7 @@ def authenticate():
         passw = request.form["password"]
         login_id = request.form["email"]
         print(login_id, passw)
-        auth_check = program_tmakers.logIntoAccount(login_id, passw)
+        auth_check = program_tmakers.checkAuth(login_id, passw)
         if auth_check:
             print("WE ARE HERE")
             user = User(login_id)
@@ -168,7 +169,7 @@ def create_event():
 @app.route('/preferences')
 @login_required
 def settings():
-    return render_template("settings.html")
+    return render_template("settings.html", userid=flask_login.current_user.id)
 
 @app.route("/activities")
 @login_required
@@ -183,6 +184,7 @@ def update_prefs():
     delay = request.form["delay"]
     print("Helloworld")
     print(notif, delay)
+    print(flask_login.current_user.id)
     return render_template("settings.html", userid=flask_login.current_user.id)
 
 
