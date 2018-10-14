@@ -19,6 +19,19 @@ def create_account(name: str, email: str, password: str) -> Owner:
     owner.save()
 
     return owner
+def joinEvent(eventId, userId):
+    query = Event.objects(id=eventId)
+    print("Q")
+    print(query)
+    events = list(query)
+    print(events)
+    print(events[0])
+    if userId not in events[0].userIds:
+        events[0].userIds.append(userId)
+        print(events[0].userIds)
+        print(len(events[0].userIds))
+        events[0].save()
+    return True
 
 def getEvents():
     print(Event.objects())

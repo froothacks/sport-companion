@@ -14,6 +14,7 @@ def main():
     print_header()
 
     print(program_tmakers.create_account('leon', 'leon@gog.com', 'laddy'))
+    # print(svc.joinEvent("5bc2e72b8c5033a0148018de", "5bc2c6808c5033b8d0227021"))
     # print(program_tmakers.logIntoAccount("ad@gog.com", "addy"))
     # program_tmakers.registerEvent(datetime.datetime.now(), 60, "Baseball2", "ad@gog.com")
     # try:
@@ -166,6 +167,7 @@ def protected():
 def join_event():
     event_id = request.form["event-id"]
     print("Curr", event_id)
+    svc.joinEvent(event_id, flask_login.current_user.id)
     return success_response
 
 
