@@ -12,6 +12,8 @@ class Owner(mongoengine.Document):
     email = mongoengine.StringField(required=True)
     password = mongoengine.StringField(required=True)
     phone = mongoengine.StringField(required=True)
+    delay = mongoengine.IntField(required=True)
+    notif_type = mongoengine.StringField(required=True)
 
     sport_ids = mongoengine.ListField() # team member
     event_ids = mongoengine.ListField() # team maker

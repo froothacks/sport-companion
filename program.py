@@ -199,7 +199,14 @@ def create_event():
 @app.route('/preferences')
 @login_required
 def settings():
-    return render_template("settings.html", userid=flask_login.current_user.id)
+    email = flask_login.current_user.id
+    acc = svc.find_account_by_email(email)
+    name = acc.name
+    noti = acc.notif_type
+    phone = acc.phone
+    delay = acc.delay
+
+    return render_template("settings.html", userid=email, name=name, delay=delay ,noti=noti, phone=phone)
 
 
 @app.route("/activities")
@@ -217,7 +224,12 @@ def update_prefs():
     print("Helloworld")
     print(notif, delay)
     print(flask_login.current_user.id)
-    return render_template("settings.html", userid=flask_login.current_user.id)
+    email = flask_login.current_user.id
+    acc = svc.find_account_by_email(email)
+    acc.delay = delay
+    acc.notif_type = notif
+    acc.save()
+    return redirect(url_for("settings"))
 
 
 @app.route('/logout')

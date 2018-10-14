@@ -37,6 +37,8 @@ def create_account(name: str, email: str, password: str, phone: str) -> Owner:
     owner.email = email
     owner.password = password
     owner.phone = phone
+    owner.delay = 60
+    owner.notif_type = "Call"
 
     owner.save()
 
