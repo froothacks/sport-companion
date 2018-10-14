@@ -106,7 +106,7 @@ def all_activites():
 @app.route('/preferences')
 @login_required
 def settings():
-    return render_template("settings.html")
+    return render_template("settings.html", userid= flask_login.current_user.id)
 
 
 @app.route("/activities")
@@ -118,10 +118,12 @@ def actvities():
 @app.route("/update_prefs", methods=["POST"])
 @login_required
 def update_prefs():
-    passw = request.form["password"]
-    login_id = request.form["email"]
-    print(login_id, passw)
-
+    print("Hello")
+    notif = request.form["notification-pref"]
+    delay = request.form["delay"]
+    print("Helloworld")
+    print(notif, delay)
+    render_template("setting.html")
 
 @app.route('/create_event', methods=["POST"])
 @login_required
@@ -135,6 +137,8 @@ def create_event():
 
     print("HELLOsasd")
     return success_response
+
+
 
 
 @app.route('/logout')
