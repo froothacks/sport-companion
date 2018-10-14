@@ -136,7 +136,7 @@ def registerEvent(startDate, minutes, name, email, loc):
     cage = svc.register_event(
         email, startDate, name, minutes, loc
     )
-
+    return str(cage.id)
     # state.reload_account()
     # success_msg(f'Register new sportevent with id {cage.id}.')
 

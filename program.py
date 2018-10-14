@@ -191,7 +191,10 @@ def create_event():
     idd = flask_login.current_user.id
     # Create Event in DB
     print("HELLOsasd")
-    program_tmakers.registerEvent(entry, duration, typpe, idd, location)
+    event_id = program_tmakers.registerEvent(entry, duration, typpe, idd, location)
+
+    print("WOEWO", event_id)
+    svc.joinEvent(event_id, flask_login.current_user.id)
 
     return success_response
 

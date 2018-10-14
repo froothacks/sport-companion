@@ -6,7 +6,7 @@ $(document).ready(function () {
         sports.create_event();
     });
     sports.render_activities($("#grid"));
-    var selectValues = ["archery", "badminton", "baseball and softball", "basketball", "beach volleyball", "boxing", "canoe / kayak", "climbing", "cycling", "diving", "golf", "gymnastics", "handball", "judo", "karate", "roller sport", "rowing", "sailing", "shooting", "soccer / football", "swimming", "surfing", "synchronized swimming", "table tennis", "taekwondo", "tennis", "track and field", "triathlon", "water polo", "weightlifting", "wrestling"]
+    var selectValues = ["football", "badminton", "basketball", "bicycle", "bowling", "soccer", "weight-training", "running", "swimming"]
     $.each(selectValues, function (key, value) {
         $('#event_type')
             .append($("<option></option>")
@@ -20,6 +20,7 @@ sports = {
     render_item: function ($elm, title, time, location, id, joined) {
         var cssc = ""
         for (let i = 0; i < joined.length; i++) {
+            console.log("LL", id, joined[i])
             if (id === joined[i]) {
                 cssc = " disabled"
             }
@@ -28,7 +29,7 @@ sports = {
         console.log($elm);
         $($elm).append(//`<div> test </div>`);
             `<div class="col-lg-3 col-md-6 mb-4">
-    <div class="card"><a href="#"><img class="card-img-top" src="/static/images/basketball.png" alt=""></a>
+    <div class="card"><a href="#"><img class="card-img-top" src="/static/images/`+title+`.png" alt=""></a>
         <div class="sport-name">` + title + `</div>
         <div>Time:` + time + `</div>
         <div>Location:` + location + `</div>
