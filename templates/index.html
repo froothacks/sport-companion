@@ -19,7 +19,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.12/css/mdb.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="{{ url_for('static', filename='css/signin.css') }}" rel="stylesheet">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.12/js/mdb.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.12/js/mdb.min.js"></script>
 </head>
 
 <body class="text-center">
@@ -33,6 +34,9 @@
     <label for="password" class="sr-only">Password</label>
     <input type="password" name="password" id="password" class="form-control" placeholder="Password" required=""
            autocomplete="off">
+    {% if error %}
+    <p class="bg-danger rounded"><strong>Error:</strong> {{ error }}
+        {% endif %}
     <div class="checkbox mb-3">
         <label>
             <input type="checkbox" value="remember-me"> Remember me

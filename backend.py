@@ -82,7 +82,7 @@ def authenticate():
             flask_login.login_user(user)
             return redirect(url_for('protected'))
         else:
-            return auth_message
+            return render_template("index.html", error="Bad email and password pair")
 
 
 @app.route('/home')
@@ -108,10 +108,12 @@ def all_activites():
 def settings():
     return render_template("settings.html")
 
+
 @app.route("/activities")
 @login_required
 def actvities():
     return render_template("activities.html")
+
 
 @app.route("/update_prefs", methods=["POST"])
 @login_required
@@ -119,6 +121,20 @@ def update_prefs():
     passw = request.form["password"]
     login_id = request.form["email"]
     print(login_id, passw)
+
+
+@app.route('/create_event', methods=["POST"])
+@login_required
+def create_event():
+    typpe = request.form['type']
+    entry = request.form['date']
+    duration = request.form['duration']
+    location = request.form['location']
+    idd = flask_login.current_user.id
+    # Create Event in DB
+
+    print("HELLOsasd")
+    return success_response
 
 
 @app.route('/logout')
