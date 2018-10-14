@@ -56,14 +56,22 @@ def request_loader(request):
 success_response = json.dumps({'success': True}), 200, {'ContentType': 'application/json'}
 
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "GET":
+        return render_template("register.html")
+
+    if request.method == "POST":
+        passw = request.form["password"]
+        login_id = request.form["email"]
+        name = request.form["name"]
+        print("REG", name, login_id, passw)
+        return redirect(url_for("authenticate"))
+
+
 @app.route("/", methods=["GET"])
 def home_page():
     return render_template("index.html")
-
-
-@app.route("/loginedin", methods=["GET"])
-def user_dash():
-    return render_template("main.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -78,7 +86,6 @@ def authenticate():
         auth_message = check_user_creds(login_id, passw)
         if auth_message == "":
             user = User(login_id)
-            user.id = login_id
             flask_login.login_user(user)
             return redirect(url_for('protected'))
         else:
@@ -93,8 +100,9 @@ def protected():
 
 def check_user_creds(login, passw):
     message = "incorrect username and password combonation"
-    if login == "cl@cl.ca" and passw == "cl@cl.ca":
-        message = ""  # Empty string for no error message
+    if login in users.keys():
+        if passw in users[login]['password']:
+            message = ""  # Empty string for no error message
     return message
 
 
@@ -106,7 +114,7 @@ def all_activites():
 @app.route('/preferences')
 @login_required
 def settings():
-    return render_template("settings.html", userid= flask_login.current_user.id)
+    return render_template("settings.html", userid=flask_login.current_user.id)
 
 
 @app.route("/activities")
@@ -125,6 +133,7 @@ def update_prefs():
     print(notif, delay)
     return render_template("settings.html", userid=flask_login.current_user.id)
 
+
 @app.route('/create_event', methods=["POST"])
 @login_required
 def create_event():
@@ -139,8 +148,6 @@ def create_event():
     return success_response
 
 
-
-
 @app.route('/logout')
 @login_required
 def logout():
@@ -149,6 +156,6 @@ def logout():
 
 
 if __name__ == '__main__':
-    users = {'cl@cl.ca': {'password': 'cl@cl.ca'}}
+    users = {'cl@cl.ca': {'password': 'cl@cl.ca'}, 'ca@ca.ca': {'password': 'ca@ca.ca'}}
     login_manager.init_app(app)
     app.run(debug=True)
