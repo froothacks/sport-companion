@@ -38,6 +38,12 @@ def getEvents():
     print(Event.objects())
     return Event.objects()
 
+
+def getJoined(email):
+    query = Event.objects(id__in=find_account_by_email(email).event_ids)
+    return list(query)
+
+
 def find_account_by_email(email: str) -> Owner:
     owner = Owner.objects(email=email).first()
     return owner

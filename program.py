@@ -174,9 +174,10 @@ def join_event():
 @app.route("/events")
 def all_activites():
     result = []
+    all_events = [str(x.id) for x in svc.getJoined(flask_login.current_user.id)]
     for i in svc.getEvents():
         result.append({"id": str(i.id), "name": i.name, "time": str(i.startDate), "location": i.location})
-    return json.dumps({'result': result})
+    return json.dumps({'result': result, 'joined': all_events})
 
 
 @app.route('/create_event', methods=["POST"])

@@ -17,7 +17,13 @@ $(document).ready(function () {
 
 
 sports = {
-    render_item: function ($elm, title, time, location, id) {
+    render_item: function ($elm, title, time, location, id, joined) {
+        var cssc = ""
+        for (let i = 0; i < joined.length; i++) {
+            if (id === joined[i]) {
+                cssc = " disabled"
+            }
+        }
         console.log(title);
         console.log($elm);
         $($elm).append(//`<div> test </div>`);
@@ -26,23 +32,27 @@ sports = {
         <div class="sport-name">` + title + `</div>
         <div>Time:` + time + `</div>
         <div>Location:` + location + `</div>
-<button data-id=` + id + ` class="join btn btn-success">Join Event</button>
+<button data-id=` + id + ` class="join btn btn-success `+cssc+"\""+`>Join Event</button>
 </div>`);
-        //$elm.last().click()
 
     },
     render_activities: function ($elm) {
         $.get("/events", function (data) {
             console.log(data);
-            data = JSON.parse(data).result;
+            data = JSON.parse(data);
+            let joined = data.joined;
+            data = data.result;
+            console.log("Hj", joined);
             for (let index = 0; index < data.length; index++) {
-                sports.render_item($elm, data[index].name, data[index].time, data[index].location, data[index].id)
+                sports.render_item($elm, data[index].name, data[index].time, data[index].location, data[index].id, joined)
             }
             $(".join").click(function () {
+                $(this).addClass("disabled");
                 var saveData = $.ajax({
                     type: 'POST',
                     url: "/join",
-                    data: {'event-id':($(this).attr("data-id"))
+                    data: {
+                        'event-id': ($(this).attr("data-id"))
                     },
                 });
 
@@ -59,7 +69,11 @@ sports = {
                 'location': $("#loc").val(),
                 'duration': $("#dur").val()
             },
+            success: function () {
+                location.reload();
+            }
         });
+
     }
 };
 
