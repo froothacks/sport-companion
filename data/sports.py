@@ -14,6 +14,7 @@ class Sport(mongoengine.Document):
     name = mongoengine.StringField(required=True)
     is_outdoors = mongoengine.BooleanField(required=True)
     is_public = mongoengine.BooleanField(required=True)
+    allow_non_friends = mongoengine.BooleanField(required=True)
     meta = {
         'db_alias': 'core',
         'collection': 'sports'

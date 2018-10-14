@@ -98,11 +98,12 @@ def register_event():
     in_outdoors = input("Is it outdoors [y, n]? ").lower().startswith('y')
     allow_non_friends = input("Do you allow strangers (non-friends) to join your event [y, n]? ").lower().startswith('y')
     name = input("Give your sportevent a name: ")
+    location = input("Where are you looking play ? (Just city name for now)")
     rating_price = float(input("How much rating are you expecting for the players to have?  "))
 
     cage = svc.register_event(
         state.active_account, name,
-        allow_non_friends, in_outdoors, in_public_place, minutes, rating_price
+        allow_non_friends, in_outdoors, in_public_place, minutes, rating_price, location
     )
 
     state.reload_account()
@@ -120,11 +121,11 @@ def list_events(suppress_header=False):
     events = svc.find_events_for_user(state.active_account)
     print(f"You have {len(events)} events.")
     for idx, c in enumerate(events):
-        print(f' {idx+1}. {c.name} for {c.duration_minutes} minutes.')
+        print(f' {idx+1}. {c.name} for {c.duration_minutes} minutes. in {c.location}')
         for b in c.bookings:
-            print('      * Booking: {}, {} days, booked? {}'.format(
-                b.check_in_date,
-                (b.check_out_date - b.check_in_date).days,
+            print('      * Booking: {}, {} minutes, booked? {}'.format(
+                b.check_in_time,
+                (b.check_out_time - b.check_in_time).seconds/60,
                 'YES' if b.booked_date is not None else 'no'
             ))
 
@@ -154,12 +155,12 @@ def update_availability():
     start_date = parser.parse(
         input("Enter available date and time 2018-10-13T12:11:50 : ")
     )
-    days = int(input("How many days is this block of time? "))
+    tiime = int(input("How much time is this block of time? "))
 
     svc.add_available_date(
         selected_event,
         start_date,
-        days
+        tiime
     )
 
     success_msg(f'Date added to event {selected_event.name}.')
@@ -186,8 +187,8 @@ def view_bookings():
         print(' * Event: {}, booked date: {}, from {} for {} days.'.format(
             c.name,
             datetime.date(b.booked_date.year, b.booked_date.month, b.booked_date.day),
-            datetime.date(b.check_in_date.year, b.check_in_date.month, b.check_in_date.day),
-            b.duration_in_days
+            datetime.date(b.check_in_time.year, b.check_in_time.month, b.check_in_time.day),
+            b.duration_in_minutes
         ))
 
 

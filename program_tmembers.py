@@ -69,9 +69,9 @@ def add_a_sportevent():
         return
 
     length = float(input('How long would you like to play (in minutes)? '))
-    location = ("Location (Address) ?")
+    location = input("Location (Address) ?")
     is_outdoors = input("Are you playing outdoors [y]es, [n]o? ").lower().startswith('y')
-    is_public = input("Are you playting in a public property/place [y]es, [n]o?").lower().startswith('y')
+    is_public = input("Are you playing in a public property/place [y]es, [n]o?").lower().startswith('y')
 
     sport = svc.add_sport(state.active_account, name, length, location, is_outdoors, is_public)
     state.reload_account()
@@ -112,12 +112,9 @@ def join_a_sport_event():
         error_msg('cancelled')
         return
 
-    checkin = parser.parse(
-        start_text
-    )
-    checkout = parser.parse(
-        input("Check-out time [yyyy-mm-dd-hh-mm]: ")
-    )
+    checkin = parser.parse(start_text)
+    duration = float(input("How long would you like to play ? [in minutes]"))
+    checkout = checkin + datetime.timedelta(minutes = duration)
     if checkin >= checkout:
         error_msg('Check in must be before check out')
         return
@@ -150,9 +147,10 @@ def join_a_sport_event():
         return
 
     sportevent = sportevents[int(input('Which sportevent do you want to join (number)')) - 1]
+    
     svc.book_event(state.active_account, sport, sportevent, checkin, checkout)
 
-    success_msg('Successfully joined {} for {} at ${}/night.'.format(sportevent.name, sport.name, sportevent.rating_price))
+    success_msg('Successfully joined {} for {} at {}.'.format(sportevent.name, sport.name, sportevent.booking.check_in_time))
 
 
 def view_your_joinings():
@@ -166,9 +164,9 @@ def view_your_joinings():
 
     print("You have {} bookings.".format(len(bookings)))
     for b in bookings:
-        print(' * Sport/Event: {} is booked at {} from {} for {} days.'.format(
-            sports.get(b.guest_sport_id).name,
-            b.sportevent.name,
-            datetime.date(b.from_date.year, b.to_date.month, b.from_date.day),
-            (b.to_date - b.from_date).days
+        print(' * Sport/Event: {} is booked at {} for the date {} for {} minutes.'.format(
+            sports.get(b.tmember_sport_id).name,
+            b.booked_date,
+            datetime.date(b.check_in_time.year, b.check_in_time.month, b.check_in_time.day),
+            (b.check_out_time - b.check_out_time).seconds/60
         ))

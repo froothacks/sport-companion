@@ -15,5 +15,5 @@ class Booking(mongoengine.EmbeddedDocument):
     @property
     def duration_in_minutes(self):
         dt = self.check_out_time - self.check_in_time
-        return dt.days
+        return dt
 		

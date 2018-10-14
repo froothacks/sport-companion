@@ -1,5 +1,5 @@
 from typing import List
-
+from pdb import set_trace as keyboard
 import datetime
 
 import bson
@@ -27,10 +27,11 @@ def find_account_by_email(email: str) -> Owner:
 
 def register_event(active_account: Owner,
                   name, allow_non_friends, in_public_place,
-                  in_outdoors, duration_minutes, rating_price) -> Event:
+                  in_outdoors, duration_minutes, rating_price, location) -> Event:
     event = Event()
 
     event.name = name
+    event.location = location
     event.duration_minutes = duration_minutes
     event.in_public_place = in_public_place
     event.in_outdoors = in_outdoors
@@ -54,10 +55,10 @@ def find_events_for_user(account: Owner) -> List[Event]:
 
 
 def add_available_date(event: Event,
-                       start_date: datetime.datetime, days: int) -> Event:
+                       start_date: datetime.datetime, tiime: int) -> Event:
     booking = Booking()
-    booking.check_in_date = start_date
-    booking.check_out_date = start_date + datetime.timedelta(days=days)
+    booking.check_in_time = start_date
+    booking.check_out_time = start_date + datetime.timedelta(minutes=tiime)
 
     event = Event.objects(id=event.id).first()
     event.bookings.append(booking)
@@ -91,22 +92,23 @@ def get_sports_for_user(user_id: bson.ObjectId) -> List[Sport]:
 
 def get_available_events(checkin: datetime.datetime,
                         checkout: datetime.datetime, sport: Sport) -> List[Event]:
-    min_size = sport.duration_minutes / 4
+    min_size = sport.duration_minutes
+    location = sport.location
 
     query = Event.objects() \
-        .filter(duration_minutes__gte=min_size) \
-        .filter(bookings__check_in_date__lte=checkin) \
-        .filter(bookings__check_out_date__gte=checkout)
-
-    if sport.is_outdoors:
-        query = query.filter(is_outdoors=True)
+        .filter(duration_minutes__lte=min_size) \
+        .filter(bookings__check_in_time__lte=checkin) \
+        .filter(bookings__check_out_time__gte=checkout) 
+        
+    #if sport.allow_non_friends:
+     #   query = query.filter(allow_non_friends=True)
 
     events = query.order_by('rating_price', '-duration_minutes')
 
     final_events = []
     for c in events:
         for b in c.bookings:
-            if b.check_in_date <= checkin and b.check_out_date >= checkout and b.tmember_sport_id is None:
+            if b.check_in_time <= checkin and b.check_out_time >= checkout and b.tmember_sport_id is None:
                 final_events.append(c)
 
     return final_events
@@ -116,7 +118,7 @@ def book_event(account, sport, event, checkin, checkout):
     booking: Booking = None
 
     for b in event.bookings:
-        if b.check_in_date <= checkin and b.check_out_date >= checkout and b.tmemeber_sport_id is None:
+        if b.check_in_time <= checkin and b.check_out_time >= checkout and b.tmember_sport_id is None:
             booking = b
             break
 
@@ -124,6 +126,7 @@ def book_event(account, sport, event, checkin, checkout):
     booking.tmember_sport_id = sport.id
     booking.booked_date = datetime.datetime.now()
 
+    keyboard()
     event.save()
 
 

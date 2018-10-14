@@ -8,6 +8,7 @@ class Event(mongoengine.Document):
     registered_date = mongoengine.DateTimeField(default=datetime.datetime.now)
 
     name = mongoengine.StringField(required=True)
+    location = mongoengine.StringField(required=True)
     rating_price = mongoengine.FloatField(required=True) # Minimum rating that the team maker is expecting to have for team members
     duration_minutes = mongoengine.FloatField(required=True)
     in_public_place = mongoengine.BooleanField(required=True)
