@@ -57,13 +57,14 @@ def create_account():
 
     name = input('What is your name? ')
     email = input('What is your email? ').strip().lower()
+    password = input('Choose a password:')
 
     old_account = svc.find_account_by_email(email)
     if old_account:
         error_msg(f"ERROR: Account with email {email} already exists.")
         return
 
-    state.active_account = svc.create_account(name, email)
+    state.active_account = svc.create_account(name, email, password)
     success_msg(f"Created new account with id {state.active_account.id}.")
 
 
@@ -72,13 +73,30 @@ def log_into_account():
 
     email = input('What is your email? ').strip().lower()
     account = svc.find_account_by_email(email)
-
+    print(account)
     if not account:
         error_msg(f'Could not find account with email {email}.')
         return
 
     state.active_account = account
     success_msg('Logged in successfully.')
+
+def logIntoAccount(email, password):
+    email = email.strip().lower()
+    account = svc.find_account_by_email(email)
+    print(account)
+
+    if not account or account["password"] != password:
+        print("LOG IN FAILED")
+
+        #print(account['password'])
+        return False
+
+    print(account['password'])
+    state.active_account = account
+    print("LOG IN SUCCESS")
+    return True
+
 
 
 def register_event():
@@ -108,6 +126,31 @@ def register_event():
     state.reload_account()
     success_msg(f'Register new sportevent with id {cage.id}.')
 
+def registerEvent(startDate, minutes, name, username):
+    print(' ****************** REGISTER EVENT **************** ')
+
+    if not state.active_account:
+        print('You must login first to register an event.')
+        return False
+
+    # minutes = input('How long is the duration for the event? ')
+    # if not minutes:
+    #     error_msg('Cancelled')
+    #     return
+
+    minutes = float(minutes)
+    # in_public_place = input("Is it in a public space [y, n]? ").lower().startswith('y')
+    # in_outdoors = input("Is it outdoors [y, n]? ").lower().startswith('y')
+    # allow_non_friends = input("Do you allow strangers (non-friends) to join your event [y, n]? ").lower().startswith('y')
+    # name = input("Give your sportevent a name: ")
+    # rating_price = float(input("How much rating are you expecting for the players to have?  "))
+
+    cage = svc.register_event(
+        state.active_account, startDate, name, minutes
+    )
+
+    state.reload_account()
+    success_msg(f'Register new sportevent with id {cage.id}.')
 
 def list_events(suppress_header=False):
     if not suppress_header:

@@ -10,10 +10,11 @@ from data.owners import Owner
 from data.sports import Sport # from the tmember side query
 
 
-def create_account(name: str, email: str) -> Owner:
+def create_account(name: str, email: str, password: str) -> Owner:
     owner = Owner()
     owner.name = name
     owner.email = email
+    owner.password = password
 
     owner.save()
 
@@ -26,16 +27,12 @@ def find_account_by_email(email: str) -> Owner:
 
 
 def register_event(active_account: Owner,
-                  name, allow_non_friends, in_public_place,
-                  in_outdoors, duration_minutes, rating_price) -> Event:
+                   startDate, name, minutes) -> Event:
     event = Event()
 
     event.name = name
-    event.duration_minutes = duration_minutes
-    event.in_public_place = in_public_place
-    event.in_outdoors = in_outdoors
-    event.allow_non_friends = allow_non_friends
-    event.rating_price = rating_price
+    event.startDate = startDate
+    event.minutes = minutes
 
     event.save()
 
