@@ -30,12 +30,13 @@ def find_account_by_email(email: str) -> Owner:
 
 
 def register_event(email,
-                   startDate, name, minutes) -> Event:
+                   startDate, name, minutes, loc) -> Event:
     event = Event()
 
     event.name = name
     event.startDate = startDate
     event.minutes = minutes
+    event.location = loc
 
     event.save()
 

@@ -7,11 +7,12 @@ import services.data_service as svc
 
 from dateutil import parser
 
+
 def main():
     mongo_setup.global_init()
 
     print_header()
-    svc.getEvents()
+
     print(program_tmakers.create_account('leon', 'leon@gog.com', 'laddy'))
     # print(program_tmakers.logIntoAccount("ad@gog.com", "addy"))
     # program_tmakers.registerEvent(datetime.datetime.now(), 60, "Baseball2", "ad@gog.com")
@@ -50,6 +51,7 @@ def find_user_intent():
 
     return 'book'
 
+
 from flask import Flask, render_template, request, redirect, url_for
 import json
 import flask_login
@@ -83,7 +85,6 @@ class User(flask_login.UserMixin):
 def user_loader(email):
     # if email not in users.keys():
     #     return
-
 
     user = User(email)
 
@@ -132,11 +133,6 @@ def home_page():
     return render_template("index.html")
 
 
-@app.route("/loginedin", methods=["GET"])
-def user_dash():
-    return render_template("main.html")
-
-
 @app.route("/login", methods=["GET", "POST"])
 def authenticate():
     if request.method == "GET":
@@ -157,6 +153,7 @@ def authenticate():
         else:
             return render_template("index.html", error="Bad email and password pair")
 
+
 @app.route('/home')
 @login_required
 def protected():
@@ -164,10 +161,21 @@ def protected():
     return render_template("main.html")
 
 
+@app.route('/join', methods=["POST"])
+@login_required
+def join_event():
+    event_id = request.form["event-id"]
+    print("Curr", event_id)
+    return success_response
+
 
 @app.route("/events")
 def all_activites():
-    return json.dumps({'result': [{"id": "1321321321", "name": "Baseball", "event-time": "2018-10-13T12:11:50"}]})
+    result = []
+    for i in svc.getEvents():
+        result.append({"id": str(i.id), "name": i.name, "time": str(i.startDate), "location": i.location})
+    return json.dumps({'result': result})
+
 
 @app.route('/create_event', methods=["POST"])
 @login_required
@@ -179,19 +187,22 @@ def create_event():
     idd = flask_login.current_user.id
     # Create Event in DB
     print("HELLOsasd")
-    program_tmakers.registerEvent(entry, duration, typpe, idd)
+    program_tmakers.registerEvent(entry, duration, typpe, idd, location)
 
     return success_response
+
 
 @app.route('/preferences')
 @login_required
 def settings():
     return render_template("settings.html", userid=flask_login.current_user.id)
 
+
 @app.route("/activities")
 @login_required
 def actvities():
     return render_template("activities.html")
+
 
 @app.route("/update_prefs", methods=["POST"])
 @login_required
@@ -203,7 +214,6 @@ def update_prefs():
     print(notif, delay)
     print(flask_login.current_user.id)
     return render_template("settings.html", userid=flask_login.current_user.id)
-
 
 
 @app.route('/logout')

@@ -114,7 +114,7 @@ def checkAuth(email, password):
 #     state.reload_account()
 #     success_msg(f'Register new sportevent with id {cage.id}.')
 
-def registerEvent(startDate, minutes, name, email):
+def registerEvent(startDate, minutes, name, email, loc):
     print(' ****************** REGISTER EVENT **************** ')
 
     # if not .email:
@@ -134,7 +134,7 @@ def registerEvent(startDate, minutes, name, email):
     # rating_price = float(input("How much rating are you expecting for the players to have?  "))
 
     cage = svc.register_event(
-        email, startDate, name, minutes
+        email, startDate, name, minutes, loc
     )
 
     # state.reload_account()
