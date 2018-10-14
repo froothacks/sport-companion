@@ -52,7 +52,7 @@ def show_commands():
     print()
 
 
-def create_account(name, email, password):
+def create_account(name, email, password, phone):
     print(' ****************** REGISTER **************** ')
 
     # name = input('What is your name? ')
@@ -64,7 +64,7 @@ def create_account(name, email, password):
         error_msg(f"ERROR: Account with email {email} already exists.")
         return False
 
-    state.active_account = svc.create_account(name, email, password)
+    state.active_account = svc.create_account(name, email, password, phone)
     success_msg(f"Created new account with id {svc.find_account_by_email(email).id}.")
     return True
 

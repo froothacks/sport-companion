@@ -10,11 +10,12 @@ from data.owners import Owner
 from data.sports import Sport # from the tmember side query
 
 
-def create_account(name: str, email: str, password: str) -> Owner:
+def create_account(name: str, email: str, password: str, phone: str) -> Owner:
     owner = Owner()
     owner.name = name
     owner.email = email
     owner.password = password
+    owner.phone = phone
 
     owner.save()
 
