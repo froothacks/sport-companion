@@ -123,7 +123,7 @@ def update_prefs():
     delay = request.form["delay"]
     print("Helloworld")
     print(notif, delay)
-    render_template("setting.html")
+    return render_template("settings.html", userid=flask_login.current_user.id)
 
 @app.route('/create_event', methods=["POST"])
 @login_required
