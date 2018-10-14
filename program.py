@@ -3,8 +3,8 @@ import program_tmakers
 import data.mongo_setup as mongo_setup
 from colorama import Fore
 import infrastructure.state as state
-import datetime
 
+from dateutil import parser
 
 def main():
     mongo_setup.global_init()
@@ -97,6 +97,7 @@ def register():
         login_id = request.form["email"]
         name = request.form["name"]
         print("REG", name, login_id, passw)
+        program_tmakers.create_account(name, login_id, passw)
         return redirect(url_for("authenticate"))
 
 
@@ -170,12 +171,14 @@ def all_activites():
 @login_required
 def create_event():
     typpe = request.form['type']
-    entry = request.form['date']
-    duration = request.form['duration']
+    entry = parser.parse(request.form['date'])
+    duration = float(request.form['duration'])
     location = request.form['location']
     idd = flask_login.current_user.id
     # Create Event in DB
     print("HELLOsasd")
+    program_tmakers.registerEvent(entry, duration, typpe, idd)
+
     return success_response
 
 @app.route('/preferences')
