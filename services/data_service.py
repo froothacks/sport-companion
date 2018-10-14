@@ -17,6 +17,7 @@ import os, time
 from apscheduler.schedulers.background import BackgroundScheduler
 from datetime import datetime, timedelta
 import dateutil.parser
+from datetime import timedelta
 
 # Load secrets
 with open('secrets.json') as secretsFile:
@@ -43,25 +44,29 @@ def create_account(name: str, email: str, password: str, phone: str) -> Owner:
     return owner
 def joinEvent(eventId, userId):
     query = Event.objects(id=eventId)
-    userNumber = Owner.objects(email=userId)[0].phone
+    curUser = Owner.objects(email=userId)[0]
+    userNumber = curUser.phone
     print(userNumber)
     print("Q")
     print(query)
     events = list(query)
     print(events)
-    print(events[0])
+    curEvent = events[0]
+    print(curEvent)
     if userId not in events[0].userIds:
-        events[0].userIds.append(userId)
-        print(events[0].userIds)
-        print(len(events[0].userIds))
-        events[0].save()
+        curEvent.userIds.append(userId)
+        print(curEvent.userIds)
+        print(len(curEvent.userIds))
+        curEvent.save()
 
         # Custom message
-        message = "The rocket will launch in thirty minutes"
+        message = "Hey " + curUser.name + "! " + curEvent.name + " starts in " + " 1 hour at " + curEvent.location + " and has a duration of " + str(int(curEvent.minutes)) + " minutes."
         message = urllib.parse.quote_plus(message)
         print(message)
-        print(str(events[0].startDate))
-        scheduler.add_job(call, 'date', run_date=events[0].startDate, args=[message, userNumber])
+        remindDate = curEvent.startDate - timedelta(hours=4) - timedelta(hours=1)
+        print(str(curEvent.startDate))
+        print(str( curEvent.startDate - timedelta(hours=4) - timedelta(hours=1)))
+        scheduler.add_job(call, 'date', run_date=remindDate, args=[message, userNumber])
 
         scheduler.start()
 
