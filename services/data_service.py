@@ -20,6 +20,9 @@ def create_account(name: str, email: str, password: str) -> Owner:
 
     return owner
 
+def getEvents():
+    print(Event.objects())
+    return Event.objects()
 
 def find_account_by_email(email: str) -> Owner:
     owner = Owner.objects(email=email).first()
