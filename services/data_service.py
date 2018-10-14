@@ -29,7 +29,7 @@ auth_token = secrets["auth_token"]
 client = Client(account_sid, auth_token)
 
 scheduler = BackgroundScheduler()
-
+scheduler.start()
 
 
 def create_account(name: str, email: str, password: str, phone: str) -> Owner:
@@ -62,15 +62,20 @@ def joinEvent(eventId, userId):
         curEvent.save()
 
         # Custom message
-        message = "Hey " + curUser.name + "! " + curEvent.name + " starts in " + " 1 hour at " + curEvent.location + " and has a duration of " + str(int(curEvent.minutes)) + " minutes."
-        message = urllib.parse.quote_plus(message)
+        message = "Hey " + curUser.name + "! " + curEvent.name + " starts in " + str(int(curUser.delay)) + " minutes at " + curEvent.location + " and has a duration of " + str(int(curEvent.minutes)) + " minutes."
+
         print(message)
-        remindDate = curEvent.startDate - timedelta(hours=4) - timedelta(hours=1)
+        remindDate = curEvent.startDate - timedelta(minutes=curUser.delay)
         print(str(curEvent.startDate))
         print(str( curEvent.startDate - timedelta(hours=4) - timedelta(hours=1)))
-        scheduler.add_job(call, 'date', run_date=remindDate, args=[message, userNumber])
+        print(str(curEvent))
+        if (curUser.notif_type == "Call"):
+            message = urllib.parse.quote_plus(message)
+            scheduler.add_job(call, 'date', run_date=remindDate, args=[message, userNumber])
+        else:
+            scheduler.add_job(sms, 'date', run_date=remindDate, args=[message, userNumber])
 
-        scheduler.start()
+
 
     return True
 
@@ -98,6 +103,15 @@ def call(callMessage, toNumber):
 
     # Print call ID
     print(call.sid)
+
+def sms(smsMessage, toNumber):
+    message = client.messages.create(
+        body=smsMessage,
+        from_=secrets["from"],
+        to=toNumber
+    )
+
+    print(message.sid)
 def register_event(email,
                    startDate, name, minutes, loc) -> Event:
     event = Event()
